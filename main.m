@@ -4,19 +4,20 @@ close all
 
 %......................Artificial Potential Field.........................
 
-Robot_Coordinate    = [3 3]               ;% Rabot Coordinate = [x-axis y-axis]
-Obstacle_Coordinate = [6 6]               ;% Obstacle Coordinate = [x-axis y-axis]
-Goal_Coordinate     = [9 9]               ;% Target Coordinate = [x-axis y-axis]
-Sensor_Range        = 2                   ;% Sensor Range being used
-Step_Size  = 0.4*Sensor_Range             ;% Radius of Circle for Artificial Points
-Obstacle            = [1 4]               ;% Obstacle = [Aplha Mew][0.5 0.5]
-Goal                = [1 4]               ;% Target   = [Alpha Mew][4 70]
-NPTS                = 60                  ;% Number of Artificial Points %60
-StepDegree          = 360/NPTS            ;% Step Degree in Degree for Artificial Points
-Confirm_Message     = 'Solution Exists'   ;% Message Displayed if a Good Artificial Point Exists
-Error_Message       = 'No Solution Exists';% Message Displayed if no Good Artificial Point Exists
-Bacteria_x          = Robot_Coordinate(1) ;% Artificial Best Point x
-Bacteria_y          = Robot_Coordinate(2) ;% Artificial Best Point y
+Robot_Coordinate     = [3 3]               ;% Rabot Coordinate = [x-axis y-axis]
+Obstacle1_Coordinate = [6 7]               ;% Obstacle1 Coordinate = [x-axis y-axis]
+Obstacle2_Coordinate = [6 5]               ;% Obstacle2 Coordinate = [x-axis y-axis]
+Goal_Coordinate      = [9 9]               ;% Target Coordinate = [x-axis y-axis]
+Sensor_Range         = 2                   ;% Sensor Range being used
+Step_Size   = 0.4*Sensor_Range             ;% Radius of Circle for Artificial Points
+Obstacle             = [1 4]               ;% Obstacle = [Aplha Mew][0.5 0.5]
+Goal                 = [1 4]               ;% Target   = [Alpha Mew][4 70]
+NPTS                 = 60                  ;% Number of Artificial Points %60
+StepDegree           = 360/NPTS            ;% Step Degree in Degree for Artificial Points
+Confirm_Message      = 'Solution Exists'   ;% Message Displayed if a Good Artificial Point Exists
+Error_Message        = 'No Solution Exists';% Message Displayed if no Good Artificial Point Exists
+Bacteria_x           = Robot_Coordinate(1) ;% Artificial Best Point x
+Bacteria_y           = Robot_Coordinate(2) ;% Artificial Best Point y
 %.................................Plot.....................................
 
 hold on
@@ -35,13 +36,22 @@ plot(tri3(1,:), tri3(2,:));
 
 %.............Create a purple transparent circular Obstacle................
 
-xc = Obstacle_Coordinate(1);
-yc = Obstacle_Coordinate(2);
+xc = Obstacle1_Coordinate(1);
+yc = Obstacle1_Coordinate(2);
 r = 0.2;
 x = r*sin(-pi:0.2*pi:pi) + xc;
 y = r*cos(-pi:0.2*pi:pi) + yc;
 c = [0.6 0 1];
 fill(x, y, c, 'FaceAlpha', 0.4)
+
+xc = Obstacle2_Coordinate(1);
+yc = Obstacle2_Coordinate(2);
+r = 0.2;
+x = r*sin(-pi:0.2*pi:pi) + xc;
+y = r*cos(-pi:0.2*pi:pi) + yc;
+c = [0.6 0 1];
+fill(x, y, c, 'FaceAlpha', 0.4)
+
 DTG = 1;
 while(DTG > 0.6)
     
@@ -55,7 +65,8 @@ while(DTG > 0.6)
     
     %.........................Potential Calculations.......................
     
-    J_ObstT = Obstacle(1)*exp(-Obstacle(2)*((Robot_Coordinate(1)-Obstacle_Coordinate(1))^2+(Robot_Coordinate(2)-Obstacle_Coordinate(2))^2))
+    J_ObstT = Obstacle(1)*exp(-Obstacle(2)*((Robot_Coordinate(1)-Obstacle1_Coordinate(1))^2+(Robot_Coordinate(2)-Obstacle1_Coordinate(2))^2))
+    J_ObstT = J_ObstT + Obstacle(1)*exp(-Obstacle(2)*((Robot_Coordinate(1)-Obstacle2_Coordinate(1))^2+(Robot_Coordinate(2)-Obstacle2_Coordinate(2))^2))
     J_GoalT = -Goal(1)*exp(-Goal(2)*((Robot_Coordinate(1)-Goal_Coordinate(1))^2+(Robot_Coordinate(2)-Goal_Coordinate(2))^2))
     JT = J_ObstT + J_GoalT;
     
@@ -91,7 +102,8 @@ while(DTG > 0.6)
     JT_Bacteria = zeros(1,n);
     DTG_Bacteria = zeros(1,n);
     for i=1:n
-        J_ObstT_Bacteria(i) = Obstacle(1)*exp(-Obstacle(2)*((Bacteria_x(i)-Obstacle_Coordinate(1))^2+(Bacteria_y(i)-Obstacle_Coordinate(2))^2));
+        J_ObstT_Bacteria(i) = Obstacle(1)*exp(-Obstacle(2)*((Bacteria_x(i)-Obstacle1_Coordinate(1))^2+(Bacteria_y(i)-Obstacle1_Coordinate(2))^2));
+        J_ObstT_Bacteria(i) = J_ObstT_Bacteria(i) + Obstacle(1)*exp(-Obstacle(2)*((Bacteria_x(i)-Obstacle2_Coordinate(1))^2+(Bacteria_y(i)-Obstacle2_Coordinate(2))^2));
         J_GoalT_Bacteria(i) = -Goal(1)*exp(-Goal(2)*((Bacteria_x(i)-Goal_Coordinate(1))^2+(Bacteria_y(i)-Goal_Coordinate(2))^2));
         JT_Bacteria(i) = J_ObstT_Bacteria(i) + J_GoalT_Bacteria(i);
         DTG_Bacteria(i) = sqrt((Bacteria_x(i)-Goal_Coordinate(1))^2+(Bacteria_y(i)-Goal_Coordinate(2))^2);
@@ -158,8 +170,16 @@ while(DTG > 0.6)
     
     %.............Create a purple transparent circular Obstacle............
     
-    xc = Obstacle_Coordinate(1);
-    yc = Obstacle_Coordinate(2);
+    xc = Obstacle1_Coordinate(1);
+    yc = Obstacle1_Coordinate(2);
+    r = 0.2;
+    x = r*sin(-pi:0.2*pi:pi) + xc;
+    y = r*cos(-pi:0.2*pi:pi) + yc;
+    c = [0.6 0 1];
+    fill(x, y, c, 'FaceAlpha', 0.4)
+
+    xc = Obstacle2_Coordinate(1);
+    yc = Obstacle2_Coordinate(2);
     r = 0.2;
     x = r*sin(-pi:0.2*pi:pi) + xc;
     y = r*cos(-pi:0.2*pi:pi) + yc;

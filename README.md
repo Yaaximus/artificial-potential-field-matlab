@@ -9,3 +9,4 @@
 
 ## Features
 - Single robot and goal object
+- Two obstacle objects
