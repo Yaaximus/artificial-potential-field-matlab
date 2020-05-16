@@ -1,8 +1,12 @@
 # MATLAB implementation of Artificial Potential Field
 
-![RPO1](https://user-images.githubusercontent.com/37571161/58729174-20680600-8402-11e9-82de-1bd83a97d370.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/37571161/58729174-20680600-8402-11e9-82de-1bd83a97d370.png">
+</p>
 
-![RPO](https://user-images.githubusercontent.com/37571161/58729193-2fe74f00-8402-11e9-8be1-1d5c4ffa7872.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/37571161/58729193-2fe74f00-8402-11e9-8be1-1d5c4ffa7872.png">
+</p>
 
 ## Running instruction:
 - Run the main.m file from directory. 
@@ -30,14 +34,17 @@
 
 Obstacle for Environment
 
-![6](https://user-images.githubusercontent.com/37571161/82117052-2546d680-9787-11ea-92a6-f6e88733a1d5.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/37571161/82117052-2546d680-9787-11ea-92a6-f6e88733a1d5.png">
+</p>
 
 ### Figure 3
 
 Obstacles and Target in Environment
 
-![8](https://user-images.githubusercontent.com/37571161/82117065-31cb2f00-9787-11ea-97a7-d68f5730aea4.png)
-
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/37571161/82117065-31cb2f00-9787-11ea-97a7-d68f5730aea4.png">
+</p>
 
 ## Mobile Robot Phases:
 
@@ -55,7 +62,9 @@ intervals, on a circle of radius C t .
 
 2D Grid
 
-![maneuver](https://user-images.githubusercontent.com/37571161/82116764-71911700-9785-11ea-8186-dd7be093694a.png)
+<p align="center">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/37571161/82116764-71911700-9785-11ea-8186-dd7be093694a.png">
+</p>
 
 ## Selection Criteria for point
 
